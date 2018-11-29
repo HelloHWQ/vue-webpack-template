@@ -17,7 +17,15 @@ var config = {
   module: {                    // 第三方loader的配置
     rules: [
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-      { test: /\.vue$/, use: 'vue-loader' }
+      { test: /\.vue$/, use: 'vue-loader' },
+      { test: /\.js$/, exclude: /(node_modules|bower_components)/, use: 'babel-loader' },
+      { test: /\.(jpg|png|gif|svg)$/, use: {
+        loader: 'url-loader',
+        options: {
+          limit: 80360,
+          name: '[hash:7]-[name].hwq'
+        }
+      } }
     ]
   },
   devServer: {                 // webpack-dev-server 相关配置
