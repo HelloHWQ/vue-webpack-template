@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const Webpack = require('webpack')
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')      
+
 var config = {
   entry: {                     // 入口文件地址
     main: path.join(__dirname, './src/main.js')
@@ -14,7 +16,8 @@ var config = {
   },
   module: {                    // 第三方loader的配置
     rules: [
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      { test: /\.vue$/, use: 'vue-loader' }
     ]
   },
   devServer: {                 // webpack-dev-server 相关配置
@@ -26,6 +29,7 @@ var config = {
   },
   plugins: [                   // 第三方插件
     new Webpack.HotModuleReplacementPlugin(),       // webpack4.x 需要启用这个插件才能实现热更新
+    new VueLoaderPlugin(),                          // vue-loade@15.x版本需要添加此插件才有效
     new HtmlWebpackPlugin({                     
       title: 'Hello World',
       template: './src/index.html' //模板地址
